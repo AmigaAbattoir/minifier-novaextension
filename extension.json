@@ -1,0 +1,44 @@
+{
+    "identifier": "com.abattoirsoftware.Minifier",
+    "name": "Minifier",
+    "organization": "Abattoir Software",
+    "description": "Minifies JS and CSS files on save",
+    "version": "1.0",
+    "categories": ["commands"],
+    "bugs": "https://github.com/AmigaAbattoir/minifier-novaextension/issues",
+    "repository": "https://github.com/AmigaAbattoir/minifier-novaextension",
+
+    "main": "main.js",
+
+    "_activationEvents": [
+        "onLanguage:javascript",
+        "onLanguage:css"
+    ],
+
+    "entitlements": {
+        "filesystem": "readwrite",
+        "process": true
+    },
+
+    "_commands": {
+        "extensions": [
+            {
+                "title": "Open URL",
+                "command": "minifier.openURL"
+            },
+            {
+                "title": "Run External Tool",
+                "command": "minifier.runExternalTool"
+            }
+        ]
+    },
+
+    "_config": [
+        {
+            "key": "minifier.foobar",
+            "title": "Foo the bar",
+            "type": "boolean",
+            "default": false
+        }
+    ]
+}
