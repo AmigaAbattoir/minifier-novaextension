@@ -18,27 +18,5 @@
     "entitlements": {
         "filesystem": "readwrite",
         "process": true
-    },
-
-    "_commands": {
-        "extensions": [
-            {
-                "title": "Open URL",
-                "command": "minifier.openURL"
-            },
-            {
-                "title": "Run External Tool",
-                "command": "minifier.runExternalTool"
-            }
-        ]
-    },
-
-    "_config": [
-        {
-            "key": "minifier.foobar",
-            "title": "Foo the bar",
-            "type": "boolean",
-            "default": false
-        }
-    ]
+    }
 }
