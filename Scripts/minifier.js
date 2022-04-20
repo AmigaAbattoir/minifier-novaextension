@@ -9,10 +9,16 @@ class MinifierService {
 			// console.log("Document " + editor.document.syntax + " is not JS or CSS!");
 			return;
 		}
-		// console.log("Minify should be called on "+ editor.document.path);
+		//console.log("Minify should be called on "+ editor.document.path);
 
 		var source = editor.document.path;
 		if (editor.document.syntax=="css") {
+			// Check if it should be minified (should be a pattern match or something)
+			// for now, as long as it's in a subfolder of css/
+			if(editor.document.path.indexOf("/css/")==-1) {
+				return;
+			}
+
 			if(source.substring(source.length-7)=="min.css") {
 				// console.log("Don't minify minified CSS!");
 				return;
@@ -21,6 +27,12 @@ class MinifierService {
 		}
 
 		if (editor.document.syntax=="javascript") {
+			// Check if it should be minified (should be a pattern match or something)
+			// for now, as long as it's in a subfolder of js/
+			if(editor.document.path.indexOf("/js/")==-1) {
+				return;
+			}
+
 			if(source.substring(source.length-6)=="min.js") {
 				// console.log("Don't minify minified JavaScript!");
 				return;
@@ -91,7 +103,7 @@ class MinifierService {
 		var mapFile = source.replace(".js",".min.js.map");
 
 		var lastSlashIndex = source.lastIndexOf("/");
-		var filename = source.substring(lastSlashIndex+1);
+		var mapFilename = mapFile.substring(lastSlashIndex+1);
 //		var path = nova.path.join(nova.path.join(nova.extension.path, "Jars"),"closure-compiler-v20220301.jar");
 		var path = nova.path.join(nova.path.join(nova.extension.path, "Jars"),"closure-compiler-v20180204.jar");
 
@@ -126,7 +138,7 @@ class MinifierService {
 
 		// Add sourceMappingURL to file
 		args.push("--output_wrapper");
-		args.push("%output%\n//# sourceMappingURL=" + filename + ".map");
+		args.push("%output%\n//# sourceMappingURL=" + mapFilename);
 		// Remove file name from map file: entry
 		args.push("--source_map_location_mapping");
 		args.push(targetFile+"|");
