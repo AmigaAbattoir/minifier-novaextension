@@ -3,7 +3,7 @@
     "name": "Minifier",
     "organization": "Abattoir Software",
     "description": "Minifies JS and CSS files on save",
-    "version": "1.0",
+    "version": "1.0.1",
     "categories": ["commands"],
     "bugs": "https://github.com/AmigaAbattoir/minifier-novaextension/issues",
     "repository": "https://github.com/AmigaAbattoir/minifier-novaextension",

@@ -121,6 +121,13 @@ class MinifierService {
 		args.push(source);
 		args.push("--js_output_file");
 		args.push(targetFile);
+
+		// Fix for Adobe Animate throwing errors about "Object literal contains illegal duplicate key ..., disallowed in strict mode"
+		args.push("--strict_mode_input");
+		args.push("false");
+		args.push("--jscomp_off");
+		args.push("es5Strict");
+
 		args.push("--create_source_map");
 		args.push(mapFile);
 
