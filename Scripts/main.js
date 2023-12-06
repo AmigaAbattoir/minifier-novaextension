@@ -3,7 +3,7 @@ const MinifierService = require("./minifier.js");
 exports.activate = function() {
     if(nova.inDevMode()) {
        // console.clear();
-       // console.log("MINFFIER EXTENSION GO...");
+       // console.log("MINIFIER EXTENSION ...GO...");
     }
 
     const Minifier = new MinifierService();

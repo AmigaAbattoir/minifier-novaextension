@@ -2,14 +2,21 @@ class MinifierService {
 	constructor() { }
 
 	minifyOnSave(editor) {
-		//console.log("Syntax; " + editor.document.syntax);
-		//console.log("Path: " + editor.document.path);
+		if(nova.inDevMode()) {
+			//console.log("Syntax; " + editor.document.syntax);
+			//console.log("Path: " + editor.document.path);
+		}
+
 
 		if (editor.document.syntax != "javascript" && editor.document.syntax != "css") {
-			// console.log("Document " + editor.document.syntax + " is not JS or CSS!");
+			if(nova.inDevMode()) {
+				// console.log("Document " + editor.document.syntax + " is not JS or CSS!");
+			}
 			return;
 		}
-		//console.log("Minify should be called on "+ editor.document.path);
+		if(nova.inDevMode()) {
+			//console.log("Minify should be called on "+ editor.document.path);
+		}
 
 		var source = editor.document.path;
 		if (editor.document.syntax=="css") {
@@ -20,7 +27,9 @@ class MinifierService {
 			}
 
 			if(source.substring(source.length-7)=="min.css") {
-				// console.log("Don't minify minified CSS!");
+				if(nova.inDevMode()) {
+					// console.log("Don't minify minified CSS!");
+				}
 				return;
 			}
 			this.minifyCss(source);
@@ -34,7 +43,9 @@ class MinifierService {
 			}
 
 			if(source.substring(source.length-6)=="min.js") {
-				// console.log("Don't minify minified JavaScript!");
+				if(nova.inDevMode()) {
+					// console.log("Don't minify minified JavaScript!");
+				}
 				return;
 			}
 			this.minifyJavascript(source);
@@ -42,8 +53,10 @@ class MinifierService {
 	}
 
 	minifyCss(source) {
-		//console.log("Enter minifyCss()");
-		var targetFile = source.replace(".css",".min.css");
+		if(nova.inDevMode()) {
+			//console.log("Enter minifyCss()");
+		}
+		var targetFile = source.replace(/\.[^/\\.]+$/,".min.css");
 
 		var path = nova.path.join(nova.path.join(nova.extension.path, "Jars"),"yuicompressor-2.4.8.jar");
 		var args = new Array;
@@ -59,7 +72,10 @@ class MinifierService {
 		var process = new Process("/usr/bin/env",options)
 		var stdOut = new Array;
 		var stdErr = new Array;
-//console.log(args);
+		if(nova.inDevMode()) {
+			//console.log(args);
+		}
+
 		process.onStdout(function(line) { stdOut.push(line.trim()); });
 		process.onStderr(function(line) { stdErr.push(line.trim()); });
 		process.onDidExit(function() {
@@ -94,13 +110,15 @@ class MinifierService {
 		});
 
 		process.start();
-		console.log("Exit minifyCss()");
+		if(nova.inDevMode()) {
+			//console.log("Exit minifyCss()");
+		}
 	}
 
 	minifyJavascript(source) {
 		//console.log("Enter minifyJavascript()");
-		var targetFile = source.replace(".js",".min.js");
-		var mapFile = source.replace(".js",".min.js.map");
+		var targetFile = source.replace(/\.[^/\\.]+$/,".min.js");
+		var mapFile = source.replace(/\.[^/\\.]+$/,".min.js.map");
 
 		var lastSlashIndex = source.lastIndexOf("/");
 		var mapFilename = mapFile.substring(lastSlashIndex+1);
@@ -152,8 +170,10 @@ class MinifierService {
 		// Remove file name from sources: entry
 		args.push("--source_map_location_mapping");
 		args.push(source.substring(0,source.lastIndexOf("/")+1)+"|");
+		if(nova.inDevMode()) {
+			//console.log(args);
+		}
 
-//console.log(args);
 		var options = { args: args  };
 		var process = new Process("/usr/bin/env",options)
 		var stdOut = new Array;
@@ -191,7 +211,9 @@ class MinifierService {
 			}
 		});
 		process.start();
-		//console.log("Exit minifyJavascript()");
+		if(nova.inDevMode()) {
+			//console.log("Exit minifyJavascript()");
+		}
 	}
 }
 
