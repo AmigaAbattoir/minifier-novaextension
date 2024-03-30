@@ -7,7 +7,6 @@ class MinifierService {
 			//console.log("Path: " + editor.document.path);
 		}
 
-
 		if (editor.document.syntax != "javascript" && editor.document.syntax != "css") {
 			if(nova.inDevMode()) {
 				// console.log("Document " + editor.document.syntax + " is not JS or CSS!");
@@ -100,10 +99,12 @@ class MinifierService {
 				request.actions = [ "Oops!"];
 				let promise = nova.notifications.add(request);
 
+/*
 				nova._minifierNotificationTimer = setTimeout(function() {
 					nova.notifications.cancel("min-mess");
 					console.log("So long message!");
 				}, 10000);
+*/
 			} else {
 				nova.notifications.cancel("min-mess");
 			}
@@ -121,7 +122,7 @@ class MinifierService {
 		var mapFile = source.replace(/\.[^/\\.]+$/,".min.js.map");
 
 		var lastSlashIndex = source.lastIndexOf("/");
-		var mapFilename = mapFile.substring(lastSlashIndex+1);
+		var mapFilename = mapFile.substring(lastSlashIndex+1,mapFile.length);
 //		var path = nova.path.join(nova.path.join(nova.extension.path, "Jars"),"closure-compiler-v20220301.jar");
 		var path = nova.path.join(nova.path.join(nova.extension.path, "Jars"),"closure-compiler-v20180204.jar");
 
@@ -169,9 +170,9 @@ class MinifierService {
 		args.push(targetFile+"|");
 		// Remove file name from sources: entry
 		args.push("--source_map_location_mapping");
-		args.push(source.substring(0,source.lastIndexOf("/")+1)+"|");
+		args.push(targetFile.substring(0,targetFile.lastIndexOf("/")+1)+"|");
 		if(nova.inDevMode()) {
-			//console.log(args);
+			console.log(JSON.stringify(args,true));
 		}
 
 		var options = { args: args  };
@@ -201,11 +202,12 @@ class MinifierService {
 				request.body = message;
 				request.actions = [ "Oops!"];
 				let promise = nova.notifications.add(request);
-
+/*
 				nova._minifierNotificationTimer = setTimeout(function() {
 					nova.notifications.cancel("min-mess");
 					//console.log("So long message!");
 				}, 5000);
+*/
 			} else {
 				nova.notifications.cancel("min-mess");
 			}

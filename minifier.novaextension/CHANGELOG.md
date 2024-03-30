@@ -1,3 +1,11 @@
+## Version 1.0.4
+
+* Fixed the sourceMappingUrl
+
+## Version 1.0.3
+
+* Changed notification to not auto-remove
+
 ## Version 1.0.2
 
 * Change how minified file name are generated
