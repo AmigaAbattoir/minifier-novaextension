@@ -14,6 +14,8 @@ Nothing. The extension is packed with YUICompressor (V2.4.8) and Google Closure 
 Minifier runs when ever you save a JavaScript file (".js") that is in a "js/" folder or it's subfolder
 or a CSS file (".css") that is in a "css/" folder or it's subfolder.
 
+If the minification fails, it will add an Issues to the sidebar now.
+
 ### Configuration
 
 None yet.

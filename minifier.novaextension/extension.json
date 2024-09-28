@@ -1,22 +1,22 @@
 {
-    "identifier": "com.abattoirsoftware.minifier",
-    "name": "Minifier",
-    "organization": "Abattoir Software",
-    "description": "Minifies JS and CSS files on save",
-    "version": "1.0.4",
-    "categories": ["commands"],
-    "bugs": "https://github.com/AmigaAbattoir/minifier-novaextension/issues",
-    "repository": "https://github.com/AmigaAbattoir/minifier-novaextension",
+	"identifier": "com.abattoirsoftware.minifier",
+	"name": "Minifier",
+	"organization": "Abattoir Software",
+	"description": "Minifies JS and CSS files on save",
+	"version": "1.0.5",
+	"categories": ["commands"],
+	"bugs": "https://github.com/AmigaAbattoir/minifier-novaextension/issues",
+	"repository": "https://github.com/AmigaAbattoir/minifier-novaextension",
 
-    "main": "main.js",
+	"main": "main.js",
 
-    "_activationEvents": [
-        "onLanguage:javascript",
-        "onLanguage:css"
-    ],
+	"_activationEvents": [
+		"onLanguage:javascript",
+		"onLanguage:css"
+	],
 
-    "entitlements": {
-        "filesystem": "readwrite",
-        "process": true
-    }
+	"entitlements": {
+		"filesystem": "readwrite",
+		"process": true
+	}
 }

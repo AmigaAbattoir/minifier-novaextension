@@ -1,3 +1,7 @@
+## Version 1.0.5
+
+* JS errors now reported in issue sidebar
+
 ## Version 1.0.4
 
 * Fixed the sourceMappingUrl
